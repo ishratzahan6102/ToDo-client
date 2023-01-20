@@ -25,6 +25,12 @@ import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
 import { useQuery } from '@tanstack/react-query';
 import Loading from './Shared/Loading';
 import { AuthContext } from './Context/Context';
+import task from './task-board.json'
+import Lottie from "lottie-react";
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 
 
@@ -90,10 +96,46 @@ const Register = () => {
         <div>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={1} >
-                    <Grid item md={2} className='layout' >
-                        <Item sx={{ bgcolor: "white" }}>xs=4</Item>
+                    <Grid item md={3} className='layout' >
+                    <Item sx={{ bgcolor: "#6A5ACD" }}>
+                            <div className='flex flex-col justify-center items-center gap-8 p-6 pb-0 '>
+                                <div>
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={user?.photoURL}
+                                        sx={{ width: 70, height: 70 }}
+                                    />
+                                </div>
+                                <div className='text-white'>
+                                    <div className='flex flex-row gap-4  my-2 items-center text-white'>
+                                        <SettingsApplicationsIcon ></SettingsApplicationsIcon>
+                                        <p className='mt-1'>Settings</p>
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <PermContactCalendarIcon></PermContactCalendarIcon>
+                                        <p className='mt-1'>Profile</p>
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <LoginIcon></LoginIcon>
+                                       
+                                            
+                                            <Link to='/login'><p className='mt-1'>Login</p></Link>
+                                     
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <AppRegistrationIcon></AppRegistrationIcon>
+                                        <Link to='/register'><p className='mt-1'>Register</p></Link>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+                            <div>
+                                <Lottie animationData={task} loop={true} />
+                            </div>
+                        </Item>
                     </Grid>
-                    <Grid item xs={12} md={10}>
+                    <Grid item xs={12} md={9}>
                         <Item sx={{ bgcolor: "#6A5ACD", color:"black" }}>
                             <div className='h-[800px] flex justify-center items-start'>
                                 <div className='w-4/6 p-7'>

@@ -9,12 +9,23 @@ import Modal from '@mui/material/Modal';
 import './Addtask.css'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Shared/Loading';
 import { FormControl, FormHelperText, InputLabel } from '@mui/material';
 import { Input } from 'postcss';
 import { AuthContext } from '../../Context/Context';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import AssignmentIcon from '@mui/icons-material/Assignment';   
+import { Avatar } from '@mui/material';
+import task from '../../task-board.json'
+import Lottie from "lottie-react";
+
+
 
 
 const style = {
@@ -85,7 +96,7 @@ const AddTask = () => {
               .then(result => {
                   console.log(result)
                   // toast.success(`${data.name} is added successfully`)
-                  navigate('/My Task')
+                  navigate('/myTask')
               })
         }
       })
@@ -100,15 +111,51 @@ const AddTask = () => {
         <Grid container spacing={1}>
 
           <Grid item md={3} className='layout'>
-            <Item>xs=4</Item>
+          <Item sx={{ bgcolor: "#6A5ACD" }}>
+                            <div className='flex flex-col justify-center items-center gap-8 p-6 pb-0 '>
+                                <div>
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={user?.photoURL}
+                                        sx={{ width: 70, height: 70 }}
+                                    />
+                                </div>
+                                <div className='text-white'>
+                                    <div className='flex flex-row gap-4  my-2 items-center text-white'>
+                                        <SettingsApplicationsIcon ></SettingsApplicationsIcon>
+                                        <p className='mt-1'>Settings</p>
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <PermContactCalendarIcon></PermContactCalendarIcon>
+                                        <p className='mt-1'>Profile</p>
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <LoginIcon></LoginIcon>
+                                       
+                                            
+                                            <Link to='/login'><p className='mt-1'>Login</p></Link>
+                                     
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <AppRegistrationIcon></AppRegistrationIcon>
+                                        <Link to='/register'><p className='mt-1'>Register</p></Link>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+                            <div>
+                                <Lottie animationData={task} loop={true} />
+                            </div>
+                        </Item>
           </Grid>
           <Grid item xs={12} md={9}>
             <Item>
               <Typography id="modal-modal-description" variant='h5' style={{ color: 'black' }} sx={{ my: 2 }}>
                 Add Management
               </Typography>
-              <Button onClick={handleOpen} variant="contained" color="success">
-                <AddCircleIcon className='mr-2'></AddCircleIcon>
+              <Button onClick={handleOpen} variant="contained" style={{backgroundColor: "#6A5ACD"}}>
+                <AddCircleIcon  className='mr-2'></AddCircleIcon>
                 Create Task
 
               </Button>
@@ -174,10 +221,10 @@ const AddTask = () => {
                             <span className="label-text">Priority</span>
                         </label>
                         <select style={{border: '2px solid gray', borderRadius: "4px"}}   className='w-full bg-gray-100  text-gray-600 p-1 m-1' {...register("priority")}>
-                            <option value="highest">Highest</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                            <option value="lowest">Lowest</option>
+                            <option value="Highest">Highest</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                            <option value="Lowest">Lowest</option>
                         </select>
                     </div>
                     </div>

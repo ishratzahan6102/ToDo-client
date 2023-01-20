@@ -11,10 +11,18 @@ import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Shared/Loading';
 import { Avatar, Box, Button, Grid, Modal, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import { AuthContext } from '../../Context/Context';
+import task from '../../task-board.json'
+import Lottie from "lottie-react";
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import AddTaskIcon from '@mui/icons-material/AddTask';
+import AssignmentIcon from '@mui/icons-material/Assignment'; 
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -128,7 +136,7 @@ const CompletedTask = () => {
         if (data.modifiedCount > 0) {
           // toast.success("Successfully added for advertisement!")
           refetch()
-          navigate('/My Task')
+          navigate('/myTask')
         }
       })
 
@@ -150,17 +158,53 @@ const CompletedTask = () => {
 
   return (
     <div>
-
+      
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={1}>
-          <Grid item xs={2} lg={2} className='layout'>
-            <Item>
-            </Item>
+          <Grid item xs={2} lg={3} className='layout'>
+          <Item sx={{ bgcolor: "#6A5ACD" }}>
+                            <div className='flex flex-col justify-center items-center gap-8 p-6 pb-0 '>
+                                <div>
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={user?.photoURL}
+                                        sx={{ width: 70, height: 70 }}
+                                    />
+                                </div>
+                                <div className='text-white'>
+                                    <div className='flex flex-row gap-4  my-2 items-center text-white'>
+                                        <SettingsApplicationsIcon ></SettingsApplicationsIcon>
+                                        <p className='mt-1'>Settings</p>
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <PermContactCalendarIcon></PermContactCalendarIcon>
+                                        <p className='mt-1'>Profile</p>
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <LoginIcon></LoginIcon>
+                                       
+                                            
+                                            <Link to='/login'><p className='mt-1'>Login</p></Link>
+                                     
+                                    </div>
+                                    <div className='flex flex-row gap-4  my-2  items-center text-white'>
+                                        <AppRegistrationIcon></AppRegistrationIcon>
+                                        <Link to='/register'><p className='mt-1'>Register</p></Link>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+                            <div>
+                                <Lottie animationData={task} loop={true} />
+                            </div>
+                        </Item>
           </Grid>
 
-          <Grid item xs={12} lg={10}>
+          <Grid item xs={12} lg={9}>
             <Item>
-              <TableContainer component={Paper}>
+            <p className='text-3xl text-black font-bold'>Completed Task</p>
+              <TableContainer className='my-6 h-screen' component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                   <TableHead>
                     <TableRow>

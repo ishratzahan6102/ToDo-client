@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import { Avatar } from '@mui/material';
 import AvatarGroup from '@mui/material/AvatarGroup';
-import { deepOrange, pink } from '@mui/material/colors';
-import Modal from '@mui/material/Modal';
-import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
-import { Description } from '@mui/icons-material';
-import ConfirmationModal from './ConfirmationModal';
 import { useNavigate } from 'react-router-dom';
-
+import man1 from '../man1.png'
+import man2 from '../man2.png'
+import woman1 from '../woman1.png'
+import woman2 from '../woman2.png'
+import { AttachMoney, LowPriority } from '@mui/icons-material';
 
 
 const TaskCard = ({task, refetch}) => {
@@ -36,20 +30,16 @@ const TaskCard = ({task, refetch}) => {
         headers : {
           "content-type" : "application/json",
         }
-        
     })
     .then(res => res.json())
     .then(data => {
        
         if(data.deletedCount > 0){
             refetch()
+            // toast.success("Deleted Successfully") 
 
-            // toast.success("Deleted Successfully")
-           
-        }
-        
+        }  
     })
-
   }
 
   const handleCompleted = (id) => {
@@ -65,7 +55,7 @@ const TaskCard = ({task, refetch}) => {
     if(data.modifiedCount > 0){
       // toast.success("Successfully added for advertisement!")
       refetch()
-      navigate('/Completed Task')
+      navigate('/completedTask')
     }
     })
 
@@ -103,13 +93,13 @@ const TaskCard = ({task, refetch}) => {
   
     return (
         <div>
-            <Card style={{margin: "0 auto"}} sx={{ maxWidth: 345, bgcolor: '#6A5ACD', padding: '14px' ,borderRadius: "10px", position: "relative" }}>
+            <Card style={{margin: "0 auto"}} sx={{ maxWidth: 345, bgcolor: '#6A5ACD', padding: '14px' , position: "relative" }}>
                   <div className='flex flex-row justify-between items-center my-2'>
                     <div>
-                      <Avatar src={img} sx={{  width: 70, height: 70,borderRadius:"5px" }} variant="square">
+                      <Avatar src={img} style={{backgroundColor:"white"}} variant="square">
                       </Avatar>
                     </div>
-                    <Button onClick={() => handleCompleted(_id)} variant="contained">Completed</Button>
+                    <Button onClick={() => handleCompleted(_id)} variant="contained" size='small' style={{backgroundColor:"white", color: "#6A5ACD"}}>Completed</Button>
                   </div>
                   <div className='flex flex-row justify-between items-center my-2'>
                     <p className='text-white font-bold'>{TaskName}</p>
@@ -119,18 +109,18 @@ const TaskCard = ({task, refetch}) => {
                     </div>
                   </div>
                   <div className='flex flex-row justify-start my-2'>
-                    <AvatarGroup max={4}>
-                      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-                      <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                      <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
-                      <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+                    <AvatarGroup max={3}>
+                      <Avatar  src={man1} />
+                      <Avatar  src={woman1} />
+                      <Avatar  src={man2} />
+                      <Avatar  src={woman2} />
+                     
                     </AvatarGroup>
                   </div>
                   <div className='grid grid-cols-2 justify-start text-white  my-2'>
                     <div className='flex flex-row'>
-                      <AttachFileIcon className='mr-2'></AttachFileIcon>
-                      <p className='uppercase'>{Priority}</p>
+                      <LowPriority className='mr-2'></LowPriority>
+                      <p className='normal-case'>{Priority}</p>
                     </div>
                     <div className='flex flex-row '>
                       <HourglassTopIcon className='mr-2'></HourglassTopIcon>
@@ -140,10 +130,10 @@ const TaskCard = ({task, refetch}) => {
                   <div className='grid grid-cols-2 justify-start text-white  my-2'>
                     <div className='flex flex-row'>
                       <Diversity3Icon className='mr-2'></Diversity3Icon>
-                      <p>Assigned To: {Members}</p>
+                      <p>Member: {Members}</p>
                     </div>
                     <div className='flex flex-row'>
-                      <MarkUnreadChatAltIcon className='mr-2'></MarkUnreadChatAltIcon>
+                      <AttachMoney></AttachMoney>
                       <p>{Budget}</p>
                     </div>
                   </div>
